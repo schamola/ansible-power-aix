@@ -534,7 +534,7 @@ def check_if_allocated(module, provided_lpp_source, targets):
     targets = expand_targets(targets)
 
     if not targets:
-        results['msg'] = f"No matching target found for targets \'{ params['targets'] }\'."
+        results['msg'] = f"No matching target found for targets \'{ module.params['targets'] }\'."
         module.log('NIM - Error: ' + results['msg'])
         module.fail_json(**results)
 
@@ -856,8 +856,8 @@ def install_filesets(module, params):
         # Allocate the installp bundle
 
         alloc_cmd = ['nim', '-o', 'allocate',
-                '-a', 'lpp_source=' + lpp_source,
-                '-a', 'installp_bundle=' + installp_bundle]
+                     '-a', 'lpp_source=' + lpp_source,
+                     '-a', 'installp_bundle=' + installp_bundle]
         alloc_cmd.append(target)
 
         rc, stdout, stderr = module.run_command(alloc_cmd)
